@@ -14,6 +14,7 @@ RSpec.describe Navirec do
       config = Navirec.configuration
       expect(config.base_url).to eq("https://api.navirec.com")
       expect(config.timeout).to eq(30)
+      expect(config.timezone).to eq("UTC")
     end
   end
 

@@ -6,11 +6,12 @@ require "json"
 
 module Navirec
   class Connection
-    def initialize(api_token:, base_url:, timeout:, api_version:)
+    def initialize(api_token:, base_url:, timeout:, api_version:, timezone:)
       @api_token = api_token
       @base_url = base_url
       @timeout = timeout
       @api_version = api_version
+      @timezone = timezone
     end
 
     def get(path, params = {})
@@ -26,6 +27,7 @@ module Navirec
         conn.headers["Authorization"] = "Token #{@api_token}"
         conn.headers["Content-Type"] = "application/json"
         conn.headers["Accept"] = "application/json; version=#{@api_version}"
+        conn.headers["Accept-Timezone"] = @timezone
         conn.headers["User-Agent"] = "UnicentrsSistema/RubyClient"
         conn.options.timeout = @timeout
         conn.adapter Faraday.default_adapter

@@ -12,7 +12,8 @@ module Navirec
         api_token: token,
         base_url: Navirec.configuration.base_url,
         timeout: Navirec.configuration.timeout,
-        api_version: Navirec.configuration.api_version
+        api_version: Navirec.configuration.api_version,
+        timezone: Navirec.configuration.timezone
       )
     end
 
