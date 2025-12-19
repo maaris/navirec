@@ -14,8 +14,13 @@ RSpec.describe Navirec::Resources::Trips do
 
   describe "#find" do
     it "calls GET /trips/:id/" do
-      expect(client).to receive(:get).with("/trips/789/", {})
-      trips.find(789)
+      expect(client).to receive(:get).with("/trips/abc-123/", {})
+      trips.find("abc-123")
+    end
+
+    it "calls GET /trips/:id/ with params" do
+      expect(client).to receive(:get).with("/trips/abc-123/", { format: "geojson" })
+      trips.find("abc-123", format: "geojson")
     end
   end
 end
