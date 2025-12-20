@@ -29,6 +29,14 @@ module Navirec
       Resources::Trips.new(self)
     end
 
+    def report_requests
+      Resources::ReportRequests.new(self)
+    end
+
+    def composite_reports
+      Resources::CompositeReports.new(self)
+    end
+
     def get(path, params = {})
       connection.get(path, params)
     end

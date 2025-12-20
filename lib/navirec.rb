@@ -9,6 +9,8 @@ require_relative "navirec/resources/base"
 require_relative "navirec/resources/drivers"
 require_relative "navirec/resources/vehicles"
 require_relative "navirec/resources/trips"
+require_relative "navirec/resources/report_requests"
+require_relative "navirec/resources/composite_reports"
 
 module Navirec
   class << self
