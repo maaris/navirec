@@ -15,7 +15,9 @@ module Navirec
     end
 
     def get(path, params = {}, headers = {})
-      response = connection.get(path, params, headers)
+      response = connection.get(path, params) do |req|
+        headers.each { |k, v| req.headers[k] = v }
+      end
       handle_response(response)
     end
 
@@ -52,6 +54,10 @@ module Navirec
         raise NotFoundError.new("Resource not found", response: response)
       when 429
         raise RateLimitError.new("Rate limit exceeded", response: response)
+      when 406
+        body = parse_json(response.body)
+        message = body.is_a?(Hash) ? (body[:detail] || body.to_s) : body.to_s
+        raise ApiError.new("Not Acceptable (406): #{message}", response: response)
       when 500..599
         raise ServerError.new("Server error: #{response.status}", response: response)
       else
