@@ -38,6 +38,14 @@ module Navirec
       case response.status
       when 200..299
         parse_json(response.body)
+      when 400
+        body = parse_json(response.body)
+        message = if body.is_a?(Hash)
+                    body[:detail] || body[:error] || body[:non_field_errors]&.join(", ") || body.to_s
+                  else
+                    body.to_s
+                  end
+        raise ApiError.new("Bad request: #{message}", response: response)
       when 401
         raise AuthenticationError.new("Invalid or missing API token", response: response)
       when 404

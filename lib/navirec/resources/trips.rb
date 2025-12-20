@@ -4,19 +4,25 @@ module Navirec
   module Resources
     class Trips < Base
       # List trips
-      # Filtering is required - must apply one of: account, vehicle, vehicle__in, driver, driver__in
+      # Time filtering is required - must apply one of: time__range_start, time__range_end, 
+      # start_time__lt, start_time__lte, start_time__gt, start_time__gte
       #
       # @param params [Hash] query parameters
-      # @option params [Integer] :account filter by account ID (required filter option)
-      # @option params [Integer] :vehicle filter by vehicle ID (required filter option)
-      # @option params [String] :vehicle__in filter by multiple vehicle IDs (required filter option)
-      # @option params [Integer] :driver filter by driver ID (required filter option)
-      # @option params [String] :driver__in filter by multiple driver IDs (required filter option)
+      # @option params [String] :start_time__gte filter trips starting after this ISO8601 datetime (required)
+      # @option params [String] :start_time__lte filter trips starting before this ISO8601 datetime
+      # @option params [String] :start_time__gt filter trips starting after this ISO8601 datetime (exclusive)
+      # @option params [String] :start_time__lt filter trips starting before this ISO8601 datetime (exclusive)
+      # @option params [String] :time__range_start filter by time range start
+      # @option params [String] :time__range_end filter by time range end
+      # @option params [Integer] :vehicle filter by vehicle ID
+      # @option params [String] :vehicle__in filter by multiple vehicle IDs
+      # @option params [Integer] :driver filter by driver ID
+      # @option params [String] :driver__in filter by multiple driver IDs
       # @option params [Boolean] :confirmed filter by confirmation status
       # @option params [String] :cursor pagination cursor value
       # @option params [String] :format response format ("geojson" or "json")
       # @option params [String] :ordering field to order by
-      # @option params [Integer] :page_size number of results per page
+      # @option params [Integer] :page_size number of results per page (max 1000)
       # @option params [String] :search search term
       # @option params [String] :sideload sideload related objects (accounts, areas, drivers, trips, vehicles)
       # @return [Hash] list of trips with pagination
