@@ -8,7 +8,7 @@ module Navirec
       # @param params [Hash] query parameters
       # @return [Hash] list of composite reports
       def list(params = {})
-        get("/reports/composite/", params)
+        get("/reports/composite/", params, accept_header)
       end
 
       # Find a composite report by ID
@@ -17,7 +17,7 @@ module Navirec
       # @param params [Hash] query parameters
       # @return [Hash] composite report data
       def find(id, params = {})
-        get("/reports/composite/#{id}/", params)
+        get("/reports/composite/#{id}/", params, accept_header)
       end
 
       # Fetch report data/results for a composite report
@@ -26,7 +26,13 @@ module Navirec
       # @param params [Hash] query parameters
       # @return [Hash] report data
       def data(id, params = {})
-        get("/reports/composite/#{id}/data/", params)
+        get("/reports/composite/#{id}/data/", params, accept_header)
+      end
+
+      private
+
+      def accept_header
+        { "Accept" => "application/json" }
       end
     end
   end

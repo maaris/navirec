@@ -11,8 +11,8 @@ module Navirec
 
       private
 
-      def get(path, params = {})
-        client.get(path, params)
+      def get(path, params = {}, headers = {})
+        client.get(path, params, headers)
       end
     end
   end

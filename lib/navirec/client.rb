@@ -37,8 +37,8 @@ module Navirec
       Resources::CompositeReports.new(self)
     end
 
-    def get(path, params = {})
-      connection.get(path, params)
+    def get(path, params = {}, headers = {})
+      connection.get(path, params, headers)
     end
   end
 end

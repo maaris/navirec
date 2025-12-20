@@ -14,8 +14,8 @@ module Navirec
       @timezone = timezone
     end
 
-    def get(path, params = {})
-      response = connection.get(path, params)
+    def get(path, params = {}, headers = {})
+      response = connection.get(path, params, headers)
       handle_response(response)
     end
 

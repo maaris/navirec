@@ -7,7 +7,7 @@ RSpec.describe Navirec::Resources::CompositeReports do
 
   describe "#list" do
     it "calls GET /reports/composite/ with params" do
-      expect(client).to receive(:get).with("/reports/composite/", { page_size: 10 })
+      expect(client).to receive(:get).with("/reports/composite/", { page_size: 10 }, { "Accept" => "application/json" })
       resource.list(page_size: 10)
     end
   end
@@ -15,7 +15,7 @@ RSpec.describe Navirec::Resources::CompositeReports do
   describe "#find" do
     it "calls GET /reports/composite/:id/" do
       uuid = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
-      expect(client).to receive(:get).with("/reports/composite/#{uuid}/", {})
+      expect(client).to receive(:get).with("/reports/composite/#{uuid}/", {}, { "Accept" => "application/json" })
       resource.find(uuid)
     end
   end
@@ -23,7 +23,7 @@ RSpec.describe Navirec::Resources::CompositeReports do
   describe "#data" do
     it "calls GET /reports/composite/:id/data/" do
       uuid = "497f6eca-6276-4993-bfeb-53cbbbba6f08"
-      expect(client).to receive(:get).with("/reports/composite/#{uuid}/data/", {})
+      expect(client).to receive(:get).with("/reports/composite/#{uuid}/data/", {}, { "Accept" => "application/json" })
       resource.data(uuid)
     end
   end
